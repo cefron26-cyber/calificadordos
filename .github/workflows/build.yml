@@ -29,11 +29,13 @@ jobs:
       - name: Instalar herramientas del sistema
         run: |
           sudo apt-get update
-          sudo apt-get install -y git zip unzip autoconf automake libtool pkg-config \
+          sudo apt-get install -y git zip unzip autoconf automake libtool libltdl-dev pkg-config \
             zlib1g-dev libncurses-dev libtinfo6 cmake libffi-dev libssl-dev
 
+      # Cython reciente: python-for-android arma la app con Python 3.14,
+      # que las versiones viejas de Cython (0.29) no soportan
       - name: Instalar Buildozer
-        run: pip install --upgrade buildozer "cython<3" setuptools
+        run: pip install --upgrade buildozer cython setuptools
 
       # Guarda el SDK/NDK y lo ya compilado: las siguientes compilaciones son más rápidas
       - name: Reusar lo descargado en compilaciones anteriores
